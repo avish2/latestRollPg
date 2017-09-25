@@ -1,0 +1,29 @@
+{
+  "name": "rollpg",
+  "version": "1.0.0",
+  "description": "Role playing game assistant",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Group 3",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.15.4",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mysql2": "^1.4.2",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "sequelize": "^4.8.4",
+    "socket.io": "^2.0.3"
+  }
+}

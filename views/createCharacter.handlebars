@@ -1,0 +1,81 @@
+ 
+ <h2 class="page-header">Create a Character</h2>
+
+
+<div class="continer">
+
+    <div class="form-group">
+      <label>Character Name</label>
+      <input type="text" class="form-control" id="characterName" placeholder="CharacterName">
+    </div>
+
+    <div class="form-group">
+      <label>Character Lore</label>
+      <input type="text" class="form-control" id="characterLore" placeholder="Character Lore">
+    </div>
+    
+    
+  <h3 id="selectedClassText">Select Character Class</h3>
+    <button class="btn class-btn classBtn" data-className="Archer" id="createArcher" data-id="1">Archer</button>
+    <button class="btn class-btn classBtn" data-className="Mage" id="createMage" data-id="2">Mage</button>
+    <button class="btn class-btn classBtn" data-className="Warrior" id="createWarrior" data-id="3">Warrior</button>
+
+
+  <div class="row btn-text">
+    <div class="col-lg-12" id="info-spot">
+    <div class="b-1-text b-text">
+      <br>
+      <p>The Archer can strike from afar with deadly accuracy, taking down foes before they can get in range. Here are your weapon options:</p>
+      <div style="text-align:center">
+        <p style="display:inline-block">Bow &amp; Arrows</p>
+        <img src="img/w-archerBOW&A.png" alt="" height="100px" width="100px" style="display:inline-block; margin-right:10px"></img>
+        <p style="display:inline-block">Crossbow</p>
+        <img src="img/w-archerCROSSB.png" alt="" height="100px" width="100px" style="display:inline-block; margin-right:10px"></img>
+        <p style="display:inline-block">Short Sword</p>
+        <img src="img/w-archerSHORTSW.png" alt="" height="100px" width="100px" style="display:inline-block"></img>
+      </div>
+    </div>
+    <div class="b-2-text b-text">
+      <br>
+      <p>Masters of the arcane, Mages are always searching for knowledge of all things Magic.  Their ability to cast powerful spells makes them a valuable ally in combat, though they wear no armor. Here are your weapon options:</p>
+      <div style="text-align:center">
+        <p style="display:inline-block">Staff</p>
+        <img src="img/w-mageSTAFF.png" alt="" height="100px" width="20px" style="display:inline-block; margin-right:10px; margin-left:10px"></img>
+        <p style="display:inline-block">Wand</p>
+        <img src="img/w-mageWAND.png" alt="" height="100px" width="100px" style="display:inline-block; margin-right:10px"></img>
+        <p style="display:inline-block">Dagger</p>
+        <img src="img/w-mageDAGGER.png" alt="" height="100px" width="100px" style="display:inline-block"></img>
+      </div>
+    </div>
+    <div class="b-3-text b-text">
+      <br>
+      <p>The Warrior lives by the sword, and excels in battle.  They give as good as they get, being able to take a hit that would fell lesser folk. Here are your weapon options:</p>
+      <div style="text-align:center">
+        <p style="display:inline-block">Axe</p>
+        <img src="img/w-warriorAXE.png" alt="" height="100px" width="100px" style="display:inline-block; margin-right:10px"></img>
+        <p style="display:inline-block">Mace</p>
+        <img src="img/w-warriorMACE.png" alt="" height="100px" width="100px" style="display:inline-block; margin-right:10px"></img>
+        <p style="display:inline-block">Sword &amp; Shield</p>
+        <img src="img/w-warriorSW&SH.png" alt="" height="100px" width="60px" style="display:inline-block"></img>
+      </div>
+    </div>
+
+ <h3 id="selectWeaponText">Select Your Weapon</h3>
+ <div id="archerWeaponsHolder"></div>
+ <div id="mageWeaponsHolder"></div>
+ <div id="warriorWeaponsHolder"></div>
+  
+<div id="submitCharacterDiv">
+  <button id="submitCharacter" type="submit">Create Character</button>
+  <button id="changeSelection">Change Selections</button>
+</div>
+ <form id="goToCharactersPage" action="/characters">
+    <button id="charachterPageBtn">View Characters</button>
+</form>
+  </div>
+  </div>
+
+</div>
+
+
+ <script src="js/characterPage.js"></script>

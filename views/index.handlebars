@@ -1,0 +1,20 @@
+ <h2 id="welcome" class="page-header">Welcome, {{user.name}}</h2>
+ <p class="instruct">please select the character in which you'd like to play</p>
+
+{{!-- {{#each character}}
+  <button id="character" type="submit">{{character.name}}</button>
+{{/each}}
+ --}}
+
+
+<form action="/createCharacter">
+ <button type="submit">Create a new Character</button>
+</form>
+
+<form action="/characters">
+ <button type="submit">Select Existing Character</button>
+</form>
+
+<form action="/dm">
+ <button type="submit">Play as Dungeon Master</button>
+</form>

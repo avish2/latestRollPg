@@ -1,0 +1,38 @@
+
+.classBtn { 
+  font-size:1.1em; 
+  padding:6px 18px; 
+  display:inline-block; 
+  margin:5px; 
+  border-radius:6px; 
+  border:solid rgba(0,0,0,0.2); 
+  border-width:1px 1px 5px; 
+  box-shadow:0 5px 0 rgba(0,0,0,0.1), 
+  inset 0 0 3px rgba(255,255,255,0.3); 
+  cursor:pointer; 
+  user-select:none; 
+  transition:none; 
+  background:hsl(8, 60%, 38%);
+  color: white;
+  text-shadow:-1px -1px 1px rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+.classBtn:hover {
+    transform:none; 
+    box-shadow:0 2px 0 rgba(0,0,0,0.1), 
+    inset 0 0 5px rgba(255,255,255,0.4); 
+    border-bottom-width:5px;
+    transition:none; 
+    text-decoration: none;
+}
+
+.b-text {
+    display: none;
+}
+#info-spot {
+    height: 150px;
+}
+/* li > a:focus {
+  background-color: #9c6e58;
+  text-decoration: none;
+} */
