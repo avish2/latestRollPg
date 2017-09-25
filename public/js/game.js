@@ -19,8 +19,12 @@ socket.on('enemyDamage', function(data){
           
 });
 socket.on('playerDamage', function(data){
-    checkIfPlayerIsAlive(data);
-    $('#playerHp').html(`HP: ${data.hp}`);
+    if(data.name === player.characterName){
+        checkIfPlayerIsAlive(data);
+        player.hp = data.hp;
+        $('#playerHp').html(`HP: ${player.hp}`);
+    }else{console.log('enemy attack failed')}
+    
 })
 
 
@@ -118,7 +122,9 @@ function checkIfPlayerIsAlive(player){
         $('#welcome').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
-    }else{return}
+    }else{
+        return
+    }
 }
 
 //this function displays the current enemy stats

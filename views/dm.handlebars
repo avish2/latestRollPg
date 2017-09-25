@@ -2,12 +2,21 @@
     <h3>Welcome, {{user.name}}</h3>
     <h4>Waiting for players to join the Lobby</h4>
 </div>
-
+<div id='startSession'>
+    <h4>Players have joined!</h4> 
+    <h5>when all players are present, click to start new game session</h5>
+    <button id='startSessionBtn'>Start Game Session</button>
+</div>
+<h4 id="deathDiv"></h4>
 <div id="playerDiv"></div>
+<h3 id="evilDiv"></h3>
 
-<button id="createEnemyBtn">Create Enemy</button>
-<button id="enemyCombatRollBtn">Enemy Combat Roll</button>
-<button id="enemyCheckRollBtn">Enemy Check Roll</button>
+
+<div id="dmBtns">
+    <button id="createEnemyBtn">Create Enemy</button>
+    <button id="enemyCombatRollBtn">Enemy Combat Roll</button>
+    <button id="enemyCheckRollBtn">Enemy Check Roll</button>
+</div>
 
 <div id="enemyDiv"></div>
 <div id="diceDiv"></div>

@@ -3,7 +3,8 @@ initPage();
 $(document).on('click', '#createEnemyBtn', createEnemy);
 $(document).on('click', '#enemyCombatRollBtn', function(){enemyAttack(playerArr[turnCounter])});
 $(document).on('click', '#enemyCheckRollBtn', displayEnemyCheckRoll);
-})
+$(document).on('click', '#startSessionBtn', displayPlayers);
+});
 
 
 
@@ -13,16 +14,20 @@ var turnCounter = 0;
 var currentPlayerTurn;
 var currentEnemy;
 var displayRollArr = [];
+var result;
 
 socket.on('connection',function(socket){
     console.log(socket.id)
-})
+});
 
 socket.on('newPlayer', function(data){
     playerArr.push(data);
+    console.log(playerArr);
     //currentPlayerTurn  = playerArr[turnCounter];
     //console.log(currentPlayerTurn);
-    displayPlayer(data);
+    //displayPlayers();
+    $('#welcome').hide();
+    $('#startSession').show();
 });
 
 
@@ -31,17 +36,23 @@ function initPage(){
     $('#createEnemyBtn').hide();
     $('#enemyCombatRollBtn').hide();
     $('#enemyCheckRollBtn').hide();
+    $('#startSession').hide();
 
 }
 
 function enemyAttack(player){
-   // player  = playerArr[turnCounter];
-    if(turnCounter>=playerArr.length){turnCounter === 0}
-    currentEnemy.combatRoll(player);
-    console.log(player);
-    displayEnemyCombatRoll();
-    $('#playerHp').html(`HP: ${player.hp}`);
-    sendPlayerInfo(player);
+    console.log('turn counter ' + turnCounter);
+
+        currentEnemy.combatRoll(player);
+        displayEnemyCombatRoll();
+        $(`#${turnCounter}Hp`).html(`HP: ${player.hp}`);
+        checkIfPlayerIsAlive(player);
+        sendPlayerInfo(player);
+        turnCounter++;
+   // }
+    if(turnCounter > playerArr.length - 1){
+        turnCounter = 0;
+    }else{turnCounter = turnCounter}
     
 }
 
@@ -62,30 +73,49 @@ function displayEnemyCheckRoll(){
 function sendPlayerInfo(player){
     socket.emit('playerDamage', player)
     socket.on('playerDamage', function(data){
-        console.log('player damage sent');
-    checkIfPlayerIsAlive(player);
-    }) 
+        if(result === 'Success'){
+            console.log(`${player.name} Has taken damage!`);
+            console.log('player damage sent');
+        }else{console.log('Enemy attempt failed!')}
+        
+    
+    });
 }
 
 function checkIfPlayerIsAlive(player){
     if(player.hp <= 0){
-        $('#playerList').hide();
-        $('#playerName').html(`${player.name} Has Fallen!`);
+        $(`#playerList${turnCounter}`).hide();
+        $('#deathDiv').html(`${player.name} Has Fallen!`);
+        playerArr.splice(turnCounter, 1);
+        if(playerArr.length === 0){
+            $('#playerDiv').hide('');
+            $('#deathDiv').hide();
+            $('#dmBtns').hide('');
+            $('#enemyDiv').hide();
+            $('#diceDiv').hide();
+            $('#evilDiv').html('The Forces of Evil have Triumphed!');
+        }
+        $('#playerDiv').html('');
+        displayPlayers();
+        console.log(playerArr);
     }else{return}
 }
 
-function displayPlayer(data){
-$('#welcome').hide();
-$('#playerDiv').append(`<h4 id="playerName">${data.name}</h4>`);
-$('#playerDiv').append(`
-                        <ul id="playerList">
-                        <li id="playerHp">HP: ${data.hp}</li>
-                        <li>AP: ${data.ap}</li>   
-                        <li>DE: ${data.de}</li>   
-                        <li>Weapon: ${data.weapon}</li>
-                        <li>Lore: ${data.lore}</li></ul>                        
-`);
-$('#createEnemyBtn').show();
+function displayPlayers(){
+    $('#playerDiv').show();
+    $('#startSession').hide();
+    playerArr.forEach(function(playerInArr, index){
+    $('#playerDiv').append(`<h4 id="${index}">${playerInArr.name}</h4>`);
+    $('#playerDiv').append(`
+                            <ul id="playerList${index}">
+                            <li id="${index}Hp">HP: ${playerInArr.hp}</li>
+                            <li>AP: ${playerInArr.ap}</li>   
+                            <li>DE: ${playerInArr.de}</li>   
+                            <li>Weapon: ${playerInArr.weapon}</li>
+                            <li>Lore: ${playerInArr.lore}</li></ul>                        
+    `);
+    });
+    $('#createEnemyBtn').show();
 
 }
 
@@ -115,7 +145,7 @@ function Enemy(name, hp, ap, de, weapon, lore ) {
         var roll2 = Math.floor((Math.random() * 10) + 1);
         var roll3 = Math.floor((Math.random() * 10) + 1);
         var rollTotal = roll1 + roll2 + roll3;
-        var result;
+        
     
         if(rollTotal < 4){
             result = 'Critical Fail';
