@@ -1,0 +1,103 @@
+#characterName {
+    text-align: left;
+    font-size: 30px;
+    font-style: strong;
+    margin-top: 0px;
+    float: left;
+}
+.lore {
+
+}
+#nameHealth {
+    height: 40px;
+}
+.modal-content {
+    background-color: #e2e0d6;
+    border-radius: 0;
+}
+#diceBtn {
+    text-align: center;
+}
+#attackVal,
+#defenseVal,
+#diceTotal2,
+#diceNumbers {
+    text-align: center;
+    font-size: 15px;
+}
+
+#characterImg {
+    display: inline;
+    width: 400px;
+    float: right;
+}
+
+#characterInfoDisplay {
+    float: left;
+    font-size: 20px;
+    list-style-type: none;
+    padding-left: 15px;
+    width: 250px;
+}
+
+.footer {
+    margin-top: 0px;
+}
+#healthInfo {
+    float: right;
+}
+#health {
+    font-size: 10px;
+    text-align: center;
+    margin: 0px;
+}
+
+.health-bar {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200px;
+    height: 20px;
+    padding: 5px;
+    background: #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: relative;
+  }
+  .bar {
+    background: #c54;
+    width: 100%;
+    height: 10px;
+    position: relative;
+    transition: width .5s linear;
+  }
+  #diceOutcome,
+  #diceOutcome2,
+  #diceTotal {
+      text-align: center;
+      font-size: 30px;
+      font-family: 'Walter Turncoat', cursive;
+      color: hsl(8, 60%, 38%);
+  }
+  #checkModal {
+      display: none;
+  }
+  #combatModal {
+      display: none;
+  }
+  .dieIcon {
+      height: 200px;
+      margin-top: 25px;
+  }
+  #checkDice {
+    height: 250px;
+    margin: auto;
+    text-align: center;
+  }
+  #combatDice {
+    height: 250px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+  }
