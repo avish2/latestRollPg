@@ -58,6 +58,9 @@ body {
   display: inline-block;
   text-align: center;
 }
+#dm{
+  text-align: center;
+}
 .instruct {
   text-align: center;
   margin-bottom: 30px;
@@ -113,6 +116,11 @@ button:active {
   transition:0.1s ease; 
   text-decoration: none;
 }
+
+.formBtn{
+  display:inline-block;
+}
+
 
 /* Customize container */
 @media (min-width: 768px) {
