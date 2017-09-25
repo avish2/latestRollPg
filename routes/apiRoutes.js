@@ -33,9 +33,25 @@ router.get('/selectCharacter', function(req, res){
 	}).then(function(characterData){
 		res.json(characterData);
 	})
-})
+});
 
+router.put('/updateHp', function(req, res){
+    db.Character.update({
+        hp: req.body.hp
+    },{
+        where:{characterName: req.body.characterName}
+	}).then(function(characterData){
+		res.json(characterData);
+	})
+});
 
+router.delete('/killPlayer', function(req, res){
+    db.Character.destroy({
+        where:{characterName: req.body.characterName}
+	}).then(function(characterData){
+		res.json(characterData);
+	})
+});
 
 
 module.exports = router;

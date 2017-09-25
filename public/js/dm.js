@@ -162,6 +162,7 @@ function Enemy(name, hp, ap, de, weapon, lore ) {
             result = 'Critical Success';
             player.hp -= rollTotal + rollTotal + this.ap;
         }
+        displayRollArr = [];
         displayRollArr.push(roll1);
         displayRollArr.push(roll2);
         displayRollArr.push(roll3);

@@ -21,6 +21,7 @@ socket.on('enemyDamage', function(data){
 socket.on('playerDamage', function(data){
     if(data.name === player.characterName){
         checkIfPlayerIsAlive(data);
+        updatePlaterHp(data);
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
     }else{console.log('enemy attack failed')}
@@ -112,7 +113,9 @@ function setCharacterInfo(){
                                        <li class= "characterAttributes"> Ap: ${player.ap}</li>
                                        <li class= "characterAttributes"> De: ${player.de}</li>
                                        <li class= "characterAttributes"> Class: ${player.characterClass}</li>
-                                       <li class= "characterAttributes"> Weapon: ${player.weapon}</li>`);
+                                       <li class= "characterAttributes"> Weapon: ${player.weapon}</li>
+                                       <li class= "characterAttributes"> Lore: ${player.lore}</li>
+                                       `);
 }
 
 function checkIfPlayerIsAlive(player){
@@ -122,9 +125,34 @@ function checkIfPlayerIsAlive(player){
         $('#welcome').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
+        killPlayer(player);
     }else{
         return
     }
+}
+
+function updatePlaterHp(player){
+    $.ajax({
+        method: "put",
+        url: "api/updateHp",
+        data: {
+                characterName: player.name, 
+                hp: player.hp,
+                },
+        success: console.log('hp updated')
+    });
+}
+
+function killPlayer(player){
+    $.ajax({
+        method: "delete",
+        url: "api/killPlayer",
+        data: {
+                characterName: player.name, 
+                
+                },
+        success: console.log('hp updated')
+    });
 }
 
 //this function displays the current enemy stats
@@ -203,3 +231,4 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     }
     
 }
+
