@@ -107,14 +107,13 @@ function createPlayer(){
 //this function displays our characters stats. hp, ap, de, class and weapon name
 function setCharacterInfo(){
 
-    $('#welcome').html(player.characterName);
-
+    $('#characterName').html(player.characterName);
+    $('#lore').html(player.lore);
     $('#characterInfoDisplay').html(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
                                        <li class= "characterAttributes"> Ap: ${player.ap}</li>
                                        <li class= "characterAttributes"> De: ${player.de}</li>
                                        <li class= "characterAttributes"> Class: ${player.characterClass}</li>
                                        <li class= "characterAttributes"> Weapon: ${player.weapon}</li>
-                                       <li class= "characterAttributes"> Lore: ${player.lore}</li>
                                        `);
 }
 
@@ -122,7 +121,7 @@ function checkIfPlayerIsAlive(player){
     console.log('alive')
     if(player.hp <= 0){
         $('#characterInfoDisplay').hide();
-        $('#welcome').html(`${player.name} Has Fallen!`);
+        $('#characterName').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
         killPlayer(player);
@@ -168,7 +167,7 @@ function setEnemyInfo(enemy){
     $('#enemyInfoDisplay').html(`<li class= .enemyAttributes> Hp: ${enemy.hp}</li>
                                      <li class= .enemyAttributes> Ap: ${enemy.ap}</li>
                                      <li class= .enemyAttributes> De: ${enemy.de}</li>
-                                     <li class= .enemyAttributes> Weapon: ${enemy.weapon}</li>`);
+                                     <li class= .enemyAttributes> Chosen Weapon: ${enemy.weapon}</li>`);
     }
 
 }

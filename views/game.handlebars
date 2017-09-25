@@ -1,16 +1,115 @@
-<h3 id="welcome"></h3>
+<link rel="stylesheet" href="/css/GameStyle.css" />
+<link href="https://fonts.googleapis.com/css?family=Walter+Turncoat" rel="stylesheet">
+
+
+<div id="nameHealth" class="col-lg-12">
+    <h3 id="characterName"></h3>
+    <div id="healthInfo">
+        <h4 id="health">Health Points: ${player.hp}</h4>
+        <div class="health-bar" data-total="1000" data-value="1000">
+            <div class="bar"></div>
+        </div>
+    </div>
+</div>
+<h4 id="lore"></h4>
 
 <ul id="characterInfoDisplay"></ul>
+<img id="characterImg" src="/img/characters/archer.png" alt="">
 
 <h3 id="enemyName"></h3>
 <ul id="enemyInfoDisplay"></ul>
 
-<div id="diceDiv"></div>
-
-<button id="combatRoll">Combat Roll</button>
-<button id="checkRoll">Check Roll</button>
+{{!-- <div id="diceDiv"></div> --}}
 
 
+<button id="rollDice" type="button" data-toggle="modal" data-target="#diceModal">Roll Dice</button>
+{{!-- <button id="combatRoll">Combat Roll</button>
+<button id="checkRoll">Check Roll</button> --}}
+
+  <div id="diceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="diceBtn">
+                <button id="combatRoll">Combat Roll</button>
+                <button id="checkRoll">Check Roll</button>
+            </div>
+            <div id="combatModal">
+            <h2 id="attackVal"> Your attack value is ${player.ap}</h2>
+                <div id="combatDice" class="row">
+                    <div id="dice1" class="col-lg-4">
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice1.png" style="display:none" data-value="1"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice2.png" style="display:none" data-value="2"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice3.png" style="display:none" data-value="3"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice4.png" style="display:none" data-value="4"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice5.png" style="display:none" data-value="5"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice6.png" style="display:none" data-value="6"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice7.png" style="display:none" data-value="7"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice8.png" style="display:none" data-value="8"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice9.png" style="display:none" data-value="9"></img>
+                        <img class="dice1 iconImage dieIcon" src="/img/dice/dice10.png" style="display:none" data-value="10"></img>
+                        <img class="rollAnimation  iconImage dieIcon" src="" style="display:inline"></img>
+                    </div>
+                    <div id="dice2" class="col-lg-4">
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice1.png" style="display:none" data-value="1"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice2.png" style="display:none" data-value="2"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice3.png" style="display:none" data-value="3"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice4.png" style="display:none" data-value="4"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice5.png" style="display:none" data-value="5"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice6.png" style="display:none" data-value="6"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice7.png" style="display:none" data-value="7"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice8.png" style="display:none" data-value="8"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice9.png" style="display:none" data-value="9"></img>
+                        <img class="dice2 iconImage dieIcon" src="/img/dice/dice10.png" style="display:none" data-value="10"></img>
+                        <img class="rollAnimation  iconImage dieIcon" src="" style="display:inline"></img>
+                    </div>
+                    <div id="dice3" class="col-lg-4">
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice1.png" style="display:none" data-value="1"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice2.png" style="display:none" data-value="2"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice3.png" style="display:none" data-value="3"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice4.png" style="display:none" data-value="4"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice5.png" style="display:none" data-value="5"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice6.png" style="display:none" data-value="6"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice7.png" style="display:none" data-value="7"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice8.png" style="display:none" data-value="8"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice9.png" style="display:none" data-value="9"></img>
+                        <img class="dice3 iconImage dieIcon" src="/img/dice/dice10.png" style="display:none" data-value="10"></img>
+                        <img class="rollAnimation  iconImage dieIcon" src="" style="display:inline"></img>
+                    </div>
+                </div>
+            <h2 id="diceNumbers"></h2>
+            <h2 id="diceTotal"></h2>
+            <div id="diceOutcome"></div>
+            <h2 id="defenseVal"></h2>
+            </div>
+            <div id="checkModal">
+                <div id="checkDice">
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice1.png" style="display:none" data-value="1"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice2.png" style="display:none" data-value="2"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice3.png" style="display:none" data-value="3"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice4.png" style="display:none" data-value="4"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice5.png" style="display:none" data-value="5"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice6.png" style="display:none" data-value="6"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice7.png" style="display:none" data-value="7"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice8.png" style="display:none" data-value="8"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice9.png" style="display:none" data-value="9"></img>
+                    <img class="dice1 iconImage dieIcon" src="/img/dice/dice10.png" style="display:none" data-value="10"></img>
+                    <img class="rollAnimation  iconImage dieIcon" src="" style="display:inline"></img>
+                </div>
+            <h2 id="diceTotal2"></h2>
+            <div id="diceOutcome2"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
