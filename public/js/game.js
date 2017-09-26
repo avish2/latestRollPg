@@ -148,7 +148,7 @@ function setCharacterInfo(){
 
     $('#characterName').html(player.characterName);
     $('#lore').html(player.lore);
-    $('#characterInfoDisplay').html(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
+    $('#characterInfoDisplay').prepend(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
                                        <li class= "characterAttributes"> Ap: ${player.ap}</li>
                                        <li class= "characterAttributes"> De: ${player.de}</li>
                                        <li class= "characterAttributes"> Class: ${player.characterClass}</li>
