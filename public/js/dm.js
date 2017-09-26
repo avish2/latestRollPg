@@ -15,6 +15,7 @@ var currentPlayerTurn;
 var currentEnemy;
 var displayRollArr = [];
 var result;
+var activeGame = false;
 
 socket.on('connection',function(socket){
     console.log(socket.id)
@@ -23,11 +24,12 @@ socket.on('connection',function(socket){
 socket.on('newPlayer', function(data){
     playerArr.push(data);
     console.log(playerArr);
-    //currentPlayerTurn  = playerArr[turnCounter];
-    //console.log(currentPlayerTurn);
-    //displayPlayers();
     $('#welcome').hide();
-    $('#startSession').show();
+    if(activeGame === false){
+        $('#startSession').show();
+    }
+    activeGame = true;
+    
 });
 
 
