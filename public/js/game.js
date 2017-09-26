@@ -21,7 +21,7 @@ socket.on('enemyDamage', function(data){
 socket.on('playerDamage', function(data){
     if(data.name === player.characterName){
         checkIfPlayerIsAlive(data);
-        updatePlaterHp(data);
+        updatePlayerHp(data);
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
     }else{console.log('enemy attack failed')}
@@ -146,7 +146,9 @@ function createPlayer(){
 //this function displays our characters stats. hp, ap, de, class and weapon name
 function setCharacterInfo(){
 
-    $('#characterName').html(player.characterName);
+    $('#name').html(player.characterName);
+    $('#health').html("HP: " + player.hp);
+    $('#attackVal').html(`Your Attack Value is: ${player.ap}`);
     $('#lore').html(player.lore);
     $('#characterInfoDisplay').prepend(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
                                        <li class= "characterAttributes"> Ap: ${player.ap}</li>
@@ -171,7 +173,7 @@ function checkIfPlayerIsAlive(player){
     }
 }
 
-function updatePlaterHp(player){
+function updatePlayerHp(player){
     $.ajax({
         method: "put",
         url: "api/updateHp",
@@ -189,7 +191,6 @@ function killPlayer(player){
         url: "api/killPlayer",
         data: {
                 characterName: player.name, 
-                
                 },
         success: console.log('hp updated')
     });
