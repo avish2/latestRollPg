@@ -3,7 +3,7 @@ createPlayer();
 setCharacterInfo();
 //setEnemyInfo();
 $(document).on('click', '#combatRoll', function(){attack(enemy)});
-$('#checkRoll').on('click', displyCheckRoll);
+$('#checkRoll').on('click', CheckRoll);
 
 });
 var enemy;
@@ -26,6 +26,17 @@ socket.on('playerDamage', function(data){
         $('#playerHp').html(`HP: ${player.hp}`);
     }else{console.log('enemy attack failed')}
     
+})
+
+$("#rollDice").on('click', function(){
+    console.log("hello");
+    $('#diceHolder').css("display:inline");
+    $('#diceTotal').empty();
+    $('#diceOutcome').empty();
+    $('#diceTotal2').empty();
+    $('#diceOutcome2').empty();
+    $("#checkModal").css("display","none");
+    $("#combatModal").css("display","none");
 });
 
 
@@ -56,19 +67,48 @@ function sendEnemyInfo(enemy){
 //this funcion displays the results of the users dice rolls. 
 //for now, we store the the results of the dice rolls from the player.combatRoll and player.check roll as global variables 
 //so they can be accessed by other functions
-function displayCombatRoll(){
-    $('#diceDiv').html(`Dice Rolls: ${displayRollArr[0]},  ${displayRollArr[1]}, 
-                                         ${displayRollArr[2]}, Total: ${rollTotalDisplay}, 
-                                         Result: ${rollResult}`
-                                         );
-    displayRollArr = [];
+
+function displayCombatRoll() {
+    $('#combatModal').css( "display", "inline" );
+    $('#checkModal').css( "display", "none" );
+    $(".dieIcon").css("display","none");
+    $(".rollAnimation").attr("src", "");
+    $(".rollAnimation").css("display","inline");
+    $(".rollAnimation").attr("src", "/img/dice/rollAnimation.gif");
+    setTimeout(function() {
+        $(".dieIcon").css("display","none");
+        var rollnumber1 = displayRollArr[0];
+        var rollnumber2 = displayRollArr[1];
+        var rollnumber3 = displayRollArr[2];
+        console.log("1:" + rollnumber1);
+        console.log("2:" + rollnumber2);
+        console.log("3:" + rollnumber3);
+        $('#diceNumbers').html("You rolled " + rollnumber1 + ", " + rollnumber2 + " and " + rollnumber3);
+        $('#diceTotal').html(`Total = ${rollTotalDisplay}`);
+        $('#diceOutcome').html(`${rollResult}`);
+        $(".dice1[data-value='" + rollnumber1 + "']").css("display","inline");
+        $(".dice2[data-value='" + rollnumber2 + "']").css("display","inline");
+        $(".dice3[data-value='" + rollnumber3 + "']").css("display","inline");
+            displayRollArr = []; 
+    }, 2500);
 }
 
-function displyCheckRoll(){
-    player.checkRoll();
-    $('#diceDiv').html(`Dice Roll: ${displayRollArr[0]}
-        Result: ${rollResult}`);
-        displayRollArr = [];    
+function CheckRoll() {
+    $('#checkModal').css( "display", "inline" );
+    $('#combatModal').css( "display", "none" );
+    $(".dieIcon").css("display","none");
+    $(".rollAnimation").attr("src", "");
+    $(".rollAnimation").css("display","inline");
+    $(".rollAnimation").attr("src", "/img/dice/rollAnimation.gif");
+    setTimeout(function() {
+        player.checkRoll();
+        var checkrollnumber = displayRollArr[0];
+        $(".dieIcon").css("display","none");
+        $('#diceTotal2').html("You rolled " + checkrollnumber);
+        $('#diceOutcome2').html(`${rollResult}`);
+        $("img[data-value='" + checkrollnumber + "']").css("display","inline");
+            displayRollArr = []; 
+    }, 2500);
 }
 
 
