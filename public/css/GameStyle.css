@@ -101,8 +101,14 @@
     padding-right: 25px;
     padding-bottom: 25px;
   }
+
+  #weaponImg{
+      height: 100px;
+  }
+
 .dice1,
 .dice2,
 .dice3 {
     display: inline;
 }
+
