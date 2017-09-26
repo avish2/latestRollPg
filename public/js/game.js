@@ -26,8 +26,7 @@ socket.on('playerDamage', function(data){
         $('#playerHp').html(`HP: ${player.hp}`);
     }else{console.log('enemy attack failed')}
     
-})
-
+});
 
 
 var characterFromLocalStorage = JSON.parse(localStorage.getItem('selectedCharacter'));
@@ -115,6 +114,8 @@ function setCharacterInfo(){
                                        <li class= "characterAttributes"> Class: ${player.characterClass}</li>
                                        <li class= "characterAttributes"> Weapon: ${player.weapon}</li>
                                        `);
+setImages()
+
 }
 
 function checkIfPlayerIsAlive(player){
@@ -231,3 +232,45 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     
 }
 
+
+
+function setImages(){
+    switch(player.characterClass){
+        case 'Archer':
+            $('#characterImg').attr('src', '/img/characters/archer.png');
+            break;
+            
+        case 'Mage':
+            $('#characterImg').attr('src', '/img/characters/mage.png');
+            break;
+        
+        case 'Warrior':
+            $('#characterImg').attr('src', '/img/characters/warrior.png');
+            break;
+    }
+
+
+    if(player.weapon === "Longbow"){
+        $('#weaponImg').attr('src', '/img/w-archerBOW&A.png');
+    }else if(player.weapon === "Crossbow"){
+        $('#weaponImg').attr('src', '/img/w-archerCROSSB.png');
+    }else if(player.weapon === "Sword and Sheild"){
+        $('#weaponImg').attr('src', '/img/w-warriorSW&SH.png');
+    }else if(player.weapon === "Dagger"){
+        $('#weaponImg').attr('src', '/img/w-mageDAGGER.png');
+    }else if(player.weapon === "Shortsword"){
+        $('#weaponImg').attr('src', '/img/w-archerSHORTSW.png');
+    }else if(player.weapon === "Staff"){
+        $('#weaponImg').attr('src', '/img/w-mageSTAFF.png');
+    }else if(player.weapon === "Wand"){
+        $('#weaponImg').attr('src', '/img/w-mageWAND.png');
+    }else if(player.weapon === "Axe"){
+        $('#weaponImg').attr('src', '/img/w-warriorAxe.png');
+    }else if(player.weapon === "Mace"){
+        $('#weaponImg').attr('src', '/img/w-warriorMace.png');
+    }else if(player.weapon === "Sword and Sheild"){
+        $('#weaponImg').attr('src', '/img/w-warriorSW&S.png');
+    }
+   
+
+}
