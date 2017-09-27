@@ -32,29 +32,29 @@ socket.on('newPlayer', function(data){
     
 });
 
-socket.on('checkRoll', function(data){
-    console.log(data)
-    turnCounter++;
-    if(turnCounter > playerArr.length - 1){
-        turnCounter = 0;
-    }else{turnCounter = turnCounter}
-    if(!currentEnemy){
-        currentPlayerTurn = playerArr[turnCounter].name;
-        $('#playerTurn').html('player turn ' + currentPlayerTurn);
-    }else{
-    $('#playerTurn').html('player turn ' + currentEnemy.name);
-    }
-});
+// socket.on('checkRoll', function(data){
+//     console.log(data)
+//     turnCounter++;
+//     if(turnCounter > playerArr.length - 1){
+//         turnCounter = 0;
+//     }else{turnCounter = turnCounter}
+//     if(!currentEnemy){
+//         currentPlayerTurn = playerArr[turnCounter].name;
+//         $('#playerTurn').html('player turn ' + currentPlayerTurn);
+//     }else{
+//     $('#playerTurn').html('player turn ' + currentEnemy.name);
+//     }
+// });
 
-socket.on('enemyCheckRoll', function(data){
-    console.log(data)
-    turnCounter++;
-    if(turnCounter > playerArr.length - 1){
-        turnCounter = 0;
-    }else{turnCounter = turnCounter}
-    currentPlayerTurn = playerArr[turnCounter].name;
-    $('#playerTurn').html('player turn ' + currentPlayerTurn);
-});
+// socket.on('enemyCheckRoll', function(data){
+//     console.log(data)
+//     turnCounter++;
+//     if(turnCounter > playerArr.length - 1){
+//         turnCounter = 0;
+//     }else{turnCounter = turnCounter}
+//     currentPlayerTurn = playerArr[turnCounter].name;
+//     $('#playerTurn').html('player turn ' + currentPlayerTurn);
+// });
 
 
 
@@ -79,7 +79,7 @@ function enemyAttack(player){
         turnCounter = 0;
     }else{turnCounter = turnCounter}
     currentPlayerTurn = playerArr[turnCounter].name;
-    $('#playerTurn').html('player turn ' + currentPlayerTurn);
+    //$('#playerTurn').html('player turn ' + currentPlayerTurn);
     
 }
 
@@ -131,7 +131,7 @@ function checkIfPlayerIsAlive(player){
 }
 
 function displayPlayers(){
-    $('#playerTurn').html('player turn ' + currentPlayerTurn);    
+    //$('#playerTurn').html('player turn ' + currentPlayerTurn);    
     $('#playerDiv').show();
     $('#startSession').hide();
     playerArr.forEach(function(playerInArr, index){
@@ -151,9 +151,9 @@ function displayPlayers(){
 
 var enemy = {
     name:'Owl Bear',
-    hp: 150,
+    hp: 200,
     ap: 25,
-    de: 20,
+    de: 25,
     alive: true,
     weapon: 'Tallons',
     lore: 'The most feared beast in the land'
@@ -264,7 +264,7 @@ function displayEnemy(data){
 }
 
     socket.on('enemyDamage', function(data){
-        $('#playerTurn').html('Player Turn ' + currentEnemy.name);
+       // $('#playerTurn').html('Player Turn ' + currentEnemy.name);
         if(data.hp <= 0){
             $('#enemyDiv').hide();
             $('#enemyDeathDiv').html(`${data.name} HAS FALLEN!`)
