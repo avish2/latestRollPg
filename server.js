@@ -10,8 +10,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var sequelize = require('sequelize');
 var socket = require('socket.io');
-
-
 var db = require("./models");
 var PORT = process.env.PORT || 3000;
 
@@ -84,13 +82,14 @@ app.use('/api', require('./routes/apiRoutes'));
 
 
 // Set Port
-app.set('port', (process.env.PORT || 3000));
+//app.set('port', (process.env.PORT || 3000));
 
 // var server = db.sequelize.sync({ force: false }).then(function() {
 //   app.listen(PORT, function() {
 //     console.log("App listening on PORT " + PORT);
 //   });
 // });
+
 
 db.sequelize.sync({ force: false });
 var server = app.listen(PORT, function(){
@@ -100,7 +99,7 @@ var server = app.listen(PORT, function(){
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  console.log(socket.id);
+  //console.log(socket.id);
 
   socket.on('newPlayer', function(data){
     io.sockets.emit('newPlayer', data);
