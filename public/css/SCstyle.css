@@ -1,0 +1,20 @@
+body {
+    background: url("/img/deadOwl.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#page-header {
+    text-align: center;
+    margin: 0px;
+}
+
+#message {
+    text-align: center;
+}
+#characterDisplay {
+    display: block;
+    margin-bottom: 20px;
+}
