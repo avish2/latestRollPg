@@ -122,3 +122,32 @@ body {
 #enemyName {
     font-weight: 500px;
 }
+.enemyAttributes {
+    list-style-type: none;
+}
+
+#enemyInfoDisplay {
+    border: #b57c3a;
+    border-style: solid;
+    /* position: absolute; */
+    margin-top: 290px;
+    margin-bottom: 10px;
+    /* margin-left: 73px; */
+    padding-top: 0px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    /* padding-right: 15px; */
+    width: 250px;
+    /* height: 163px; */
+    background-color: rgba(226, 201, 167, 0.44);
+}
+
+#enemyText {
+    margin-top: -32px;
+    margin-left: 185px;
+    font-size: 20px;
+    font-style: italic;
+    color: #b57c3a;
+    font-weight: 200;
+    font-family: 'Anton', sans-serif;
+}

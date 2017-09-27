@@ -155,7 +155,7 @@ var enemy = {
     ap: 25,
     de: 25,
     alive: true,
-    weapon: 'Tallons',
+    weapon: 'Talons',
     lore: 'The most feared beast in the land'
 }
 
