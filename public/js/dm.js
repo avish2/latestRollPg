@@ -23,13 +23,37 @@ socket.on('connection',function(socket){
 
 socket.on('newPlayer', function(data){
     playerArr.push(data);
-    console.log(playerArr);
+    currentPlayerTurn = playerArr[turnCounter].name;
     $('#welcome').hide();
     if(activeGame === false){
         $('#startSession').show();
     }
     activeGame = true;
     
+});
+
+socket.on('checkRoll', function(data){
+    console.log(data)
+    turnCounter++;
+    if(turnCounter > playerArr.length - 1){
+        turnCounter = 0;
+    }else{turnCounter = turnCounter}
+    if(!currentEnemy){
+        currentPlayerTurn = playerArr[turnCounter].name;
+        $('#playerTurn').html('player turn ' + currentPlayerTurn);
+    }else{
+    $('#playerTurn').html('player turn ' + currentEnemy.name);
+    }
+});
+
+socket.on('enemyCheckRoll', function(data){
+    console.log(data)
+    turnCounter++;
+    if(turnCounter > playerArr.length - 1){
+        turnCounter = 0;
+    }else{turnCounter = turnCounter}
+    currentPlayerTurn = playerArr[turnCounter].name;
+    $('#playerTurn').html('player turn ' + currentPlayerTurn);
 });
 
 
@@ -43,8 +67,7 @@ function initPage(){
 }
 
 function enemyAttack(player){
-    console.log('turn counter ' + turnCounter);
-
+    //console.log('turn counter ' + turnCounter);
         currentEnemy.combatRoll(player);
         displayEnemyCombatRoll();
         $(`#${turnCounter}Hp`).html(`HP: ${player.hp}`);
@@ -55,6 +78,8 @@ function enemyAttack(player){
     if(turnCounter > playerArr.length - 1){
         turnCounter = 0;
     }else{turnCounter = turnCounter}
+    currentPlayerTurn = playerArr[turnCounter].name;
+    $('#playerTurn').html('player turn ' + currentPlayerTurn);
     
 }
 
@@ -70,6 +95,8 @@ function displayEnemyCheckRoll(){
     $('#diceDiv').html(`Dice Roll: ${displayRollArr[0]}
         Result: ${rollResult}`);
         displayRollArr = [];    
+
+    socket.emit('enemyCheckRoll', 'enemyCheckRoll');
 }
 
 function sendPlayerInfo(player){
@@ -77,7 +104,7 @@ function sendPlayerInfo(player){
     socket.on('playerDamage', function(data){
         if(result === 'Success'){
             console.log(`${player.name} Has taken damage!`);
-            console.log('player damage sent');
+            //console.log('player damage sent');
         }else{console.log('Enemy attempt failed!')}
         
     
@@ -104,6 +131,7 @@ function checkIfPlayerIsAlive(player){
 }
 
 function displayPlayers(){
+    $('#playerTurn').html('player turn ' + currentPlayerTurn);    
     $('#playerDiv').show();
     $('#startSession').hide();
     playerArr.forEach(function(playerInArr, index){
@@ -123,9 +151,9 @@ function displayPlayers(){
 
 var enemy = {
     name:'Owl Bear',
-    hp: 300,
-    ap: 50,
-    de: 30,
+    hp: 150,
+    ap: 25,
+    de: 20,
     alive: true,
     weapon: 'Tallons',
     lore: 'The most feared beast in the land'
@@ -236,5 +264,11 @@ function displayEnemy(data){
 }
 
     socket.on('enemyDamage', function(data){
+        $('#playerTurn').html('Player Turn ' + currentEnemy.name);
+        if(data.hp <= 0){
+            $('#enemyDiv').hide();
+            $('#enemyDeathDiv').html(`${data.name} HAS FALLEN!`)
+        }else{
         $('#enemyHp').html(data.hp);
+        }
     });

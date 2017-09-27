@@ -7,7 +7,10 @@ $('#checkRoll').on('click', CheckRoll);
 
 });
 var enemy;
+var OriginalHP;
+var NewHP
 var socket = io();
+
 socket.on('newEnemy', function(data){
     setEnemyInfo(data);
      enemy = data;
@@ -24,9 +27,15 @@ socket.on('playerDamage', function(data){
         updatePlayerHp(data);
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
+        updateHPbar(player);
     }else{console.log('enemy attack failed')}
     
-})
+});
+
+socket.on('checkRoll', function(data){
+    console.log('check roll sent');
+});
+
 
 $("#rollDice").on('click', function(){
     console.log("hello");
@@ -109,6 +118,13 @@ function CheckRoll() {
         $("img[data-value='" + checkrollnumber + "']").css("display","inline");
             displayRollArr = []; 
     }, 2500);
+
+    
+    socket.emit('checkRoll', 'check roll')
+    
+
+    
+    
 }
 
 
@@ -156,7 +172,8 @@ function setCharacterInfo(){
                                        <li class= "characterAttributes"> Class: ${player.characterClass}</li>
                                        <li class= "characterAttributes"> Weapon: ${player.weapon}</li>
                                        `);
-setImages()
+setImages();
+updateHPbar(player);
 
 }
 
@@ -164,9 +181,13 @@ function checkIfPlayerIsAlive(player){
     console.log('alive')
     if(player.hp <= 0){
         $('#characterInfoDisplay').hide();
-        $('#characterName').html(`${player.name} Has Fallen!`);
+        $('#name').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
+        $('#enemyName').hide();
+        $('#enemyInfoDisplay').hide();
+        $('#lore').hide();
+        $('#rollDice').hide();
         killPlayer(player);
     }else{
         return
@@ -211,7 +232,7 @@ function setEnemyInfo(enemy){
                                      <li class= .enemyAttributes> De: ${enemy.de}</li>
                                      <li class= .enemyAttributes> Chosen Weapon: ${enemy.weapon}</li>`);
     }
-
+    
 }
 
 //our constructor function. This takes the info from the selected character (stored in local memory on the getCharacterInfo.js page)
@@ -272,6 +293,37 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     }
     
 }
+
+
+
+function updateHPbar(player){
+    console.log('tits')
+    $('#health').html("HP: " + player.hp);
+    switch(player.characterClass){
+        case 'Archer':
+            var OriginalHP = 125;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+            
+        case 'Mage':
+            var OriginalHP = 100;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+        
+        case 'Warrior':
+            var OriginalHP = 150;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+    }
+}
+
+
 
 
 
