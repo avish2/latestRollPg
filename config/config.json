@@ -19,6 +19,6 @@
     "database": "u72x4lfwb02kszah",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port":"3306"
+    "port": 3306
   }
 }
