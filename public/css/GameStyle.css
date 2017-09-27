@@ -1,7 +1,11 @@
+
 body {
     background: #e2c9a7
 }
 #characterName {
+
+#name {
+
     text-align: left;
     font-size: 30px;
     font-weight: 500px;

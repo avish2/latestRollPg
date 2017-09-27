@@ -10,10 +10,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var sequelize = require('sequelize');
 var socket = require('socket.io');
-
-
 var db = require("./models");
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Init App
 var app = express();
@@ -84,7 +82,7 @@ app.use('/api', require('./routes/apiRoutes'));
 
 
 // Set Port
-app.set('port', (process.env.PORT || 3000));
+//app.set('port', (process.env.PORT || 3000));
 
 // var server = db.sequelize.sync({ force: false }).then(function() {
 //   app.listen(PORT, function() {
@@ -92,15 +90,16 @@ app.set('port', (process.env.PORT || 3000));
 //   });
 // });
 
+
 db.sequelize.sync({ force: false });
 var server = app.listen(PORT, function(){
-  console.log('listening')
+  console.log('listening...')
 });
 
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  console.log(socket.id);
+  //console.log(socket.id);
 
   socket.on('newPlayer', function(data){
     io.sockets.emit('newPlayer', data);
@@ -121,5 +120,15 @@ io.on('connection', function(socket){
     io.sockets.emit('playerDamage', data)
     console.log(data);
   });
+
+  // socket.on('checkRoll', function(data){
+  //   io.sockets.emit('checkRoll', data)
+  //   console.log(data);
+  // });
+
+  // socket.on('enemyCheckRoll', function(data){
+  //   io.sockets.emit('enemyCheckRoll', data)
+  //   console.log(data);
+  // });
 });
 
