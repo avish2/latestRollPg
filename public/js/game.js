@@ -8,7 +8,9 @@ $('#checkRoll').on('click', CheckRoll);
 });
 var enemy;
 var OriginalHP;
-var NewHP
+
+var NewHP;
+
 var socket = io();
 
 socket.on('newEnemy', function(data){
@@ -28,6 +30,9 @@ socket.on('playerDamage', function(data){
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
         updateHPbar(player);
+
+        $("#health").html(`Health Points: ${player.hp}`);
+
     }else{console.log('enemy attack failed')}
     
 });
@@ -166,11 +171,11 @@ function setCharacterInfo(){
     $('#health').html("HP: " + player.hp);
     $('#attackVal').html(`Your Attack Value is: ${player.ap}`);
     $('#lore').html(player.lore);
-    $('#characterInfoDisplay').prepend(`<li class= "characterAttributes" id="playerHp"> Hp: ${player.hp}</li>
-                                       <li class= "characterAttributes"> Ap: ${player.ap}</li>
+    $("#health").html(`Health Points: ${player.hp}`);
+    $('#characterInfoDisplay').prepend(`<li class= "characterAttributes"> Ap: ${player.ap}</li>
                                        <li class= "characterAttributes"> De: ${player.de}</li>
-                                       <li class= "characterAttributes"> Class: ${player.characterClass}</li>
-                                       <li class= "characterAttributes"> Weapon: ${player.weapon}</li>
+                                       <li class= "characterAttributes"> <strong>Class:</strong> ${player.characterClass}</li>
+                                       <li class= "characterAttributes"> <strong>Weapon:</strong> ${player.weapon}</li>
                                        `);
 setImages();
 updateHPbar(player);
@@ -294,6 +299,30 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     
 }
 
+function updateHPbar(player){
+    switch(player.characterClass){
+        case 'Archer':
+            var OriginalHP = 125;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+            
+        case 'Mage':
+            var OriginalHP = 100;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+        
+        case 'Warrior':
+            var OriginalHP = 150;
+            var NewHP = player.hp;
+            var barHP = Math.round((NewHP / OriginalHP)*100);
+            $('.bar').attr('style', 'width:' + barHP + '%');
+            break;
+    }
+}
 
 
 function updateHPbar(player){
@@ -341,7 +370,7 @@ function setImages(){
             $('#characterImg').attr('src', '/img/characters/warrior.png');
             break;
     }
-
+    
 
     if(player.weapon === "Longbow"){
         $('#weaponImg').attr('src', '/img/w-archerBOW&A.png');

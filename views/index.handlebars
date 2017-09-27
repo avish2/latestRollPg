@@ -1,3 +1,7 @@
+
+ <h2 id="welcome" class="page-header">Welcome, {{user.name}}</h2>
+ <p class="instruct">please select a task</p>
+
  <h2 id="welcome" class="page-header">Welcome {{user.name}}, </h2>
  <p class="instruct">to the RollPG portal. Here, the path of your destiny diverges. 
   Create a new character and arm them for new adventures.  
@@ -10,7 +14,7 @@
 {{/each}}
  --}}
 
-
+<div id="optionBtns">
 <form class="formBtn" action="/createCharacter">
  <button>Create a new Character</button>
 </form>
@@ -22,3 +26,4 @@
 <form class="formBtn"  action="/dm">
  <button>Play as Dungeon Master</button>
 </form>
+</div>
