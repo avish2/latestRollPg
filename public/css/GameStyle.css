@@ -1,7 +1,14 @@
+
+body {
+    background: #e2c9a7
+}
+#characterName {
+
 #name {
+
     text-align: left;
     font-size: 30px;
-    font-style: strong;
+    font-weight: 500px;
     margin-top: 0px;
     float: left;
 }
@@ -67,10 +74,9 @@
   }
   .bar {
     background: #c54;
-    width: 100%;
     height: 10px;
     position: relative;
-    transition: width .5s linear;
+    transition: width 1.5s linear;
   }
   #diceOutcome,
   #diceOutcome2,
@@ -113,3 +119,6 @@
     display: inline;
 }
 
+#enemyName {
+    font-weight: 500px;
+}
