@@ -13,7 +13,7 @@ var socket = require('socket.io');
 
 
 var db = require("./models");
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Init App
 var app = express();
