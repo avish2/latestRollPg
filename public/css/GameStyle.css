@@ -1,8 +1,7 @@
 
 body {
-    background: #e2c9a7
+    background: #e2c9a7;
 }
-#characterName {
 
 #name {
 
@@ -12,6 +11,7 @@ body {
     margin-top: 0px;
     float: left;
 }
+
 .lore {
 
 }
