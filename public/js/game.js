@@ -5,6 +5,7 @@ setCharacterInfo();
 $(document).on('click', '#combatRoll', function(){attack(enemy)});
 $('#checkRoll').on('click', CheckRoll);
 
+
 });
 var enemy;
 var OriginalHP;
@@ -166,10 +167,11 @@ function createPlayer(){
 
 //this function displays our characters stats. hp, ap, de, class and weapon name
 function setCharacterInfo(){
-
+    $('#enemyInfoDisplay').hide();
+    $('#enemyText').hide();
     $('#name').html(player.characterName);
     $('#health').html("HP: " + player.hp);
-    $('#attackVal').html(`Your Attack Value is: ${player.ap}`);
+    $('#attackVal').html(`Your Attack Value is ${player.ap}`);
     $('#lore').html(player.lore);
     $("#health").html(`Health Points: ${player.hp}`);
     $('#characterInfoDisplay').prepend(`<li class= "characterAttributes"> Ap: ${player.ap}</li>
@@ -231,12 +233,14 @@ function setEnemyInfo(enemy){
         
         enemy = '';
     }else{
-    $('#enemyName').html(`${enemy.name}`)
-    $('#enemyInfoDisplay').html(`<li class= .enemyAttributes> Hp: ${enemy.hp}</li>
-                                     <li class= .enemyAttributes> Ap: ${enemy.ap}</li>
-                                     <li class= .enemyAttributes> De: ${enemy.de}</li>
-                                     <li class= .enemyAttributes> Chosen Weapon: ${enemy.weapon}</li>`);
+    $('#enemyInfoDisplay').show();
+    $('#enemyText').show();
+    $('#enemyInfoDisplay').html(`<li class= enemyAttributes> Hp: ${enemy.hp}</li>
+                                     <li class= enemyAttributes> Ap: ${enemy.ap}</li>
+                                     <li class= enemyAttributes> De: ${enemy.de}</li>
+                                     <li class= enemyAttributes> Weapon: ${enemy.weapon}</li>`);
     }
+    $("#enemyInfoDisplay").prepend(`<h3 id="enemyName"> ${enemy.name}</h3>`);
     
 }
 
