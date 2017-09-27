@@ -93,7 +93,7 @@ app.use('/api', require('./routes/apiRoutes'));
 
 db.sequelize.sync({ force: false });
 var server = app.listen(PORT, function(){
-  console.log('listening')
+  console.log('listening...')
 });
 
 var io = require('socket.io')(server);
