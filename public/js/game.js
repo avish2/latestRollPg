@@ -32,9 +32,9 @@ socket.on('playerDamage', function(data){
     
 });
 
-socket.on('checkRoll', function(data){
-    console.log('check roll sent');
-});
+// socket.on('checkRoll', function(data){
+//     console.log('check roll sent');
+// });
 
 
 $("#rollDice").on('click', function(){

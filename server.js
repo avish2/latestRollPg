@@ -122,14 +122,14 @@ io.on('connection', function(socket){
     console.log(data);
   });
 
-  socket.on('checkRoll', function(data){
-    io.sockets.emit('checkRoll', data)
-    console.log(data);
-  });
+  // socket.on('checkRoll', function(data){
+  //   io.sockets.emit('checkRoll', data)
+  //   console.log(data);
+  // });
 
-  socket.on('enemyCheckRoll', function(data){
-    io.sockets.emit('enemyCheckRoll', data)
-    console.log(data);
-  });
+  // socket.on('enemyCheckRoll', function(data){
+  //   io.sockets.emit('enemyCheckRoll', data)
+  //   console.log(data);
+  // });
 });
 
