@@ -125,7 +125,7 @@ $(document).ready(function(){
     
     var enemy = {
         name:'Owl Bear',
-        hp: 10,
+        hp: 200,
         ap: 25,
         de: 25,
         alive: true,
