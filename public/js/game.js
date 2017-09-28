@@ -113,9 +113,6 @@ function CheckRoll() {
         $("img[data-value='" + checkrollnumber + "']").css("display","inline");
             displayRollArr = []; 
     }, 2500);
-
-    
-   // socket.emit('checkRoll', 'check roll')
     
 }
 
@@ -131,9 +128,7 @@ function createPlayer(){
                                          selectedCharacter.de,
                                          selectedCharacter.alive,
                                          selectedCharacter.weapon,
-                                         selectedCharacter.lore,
-                                        // selectedCharacter.level,
-                                         //selectedCharacter.exp
+                                         selectedCharacter.lore
                                         );
     player = sessionCharacter;
    
@@ -145,8 +140,6 @@ function createPlayer(){
         alive: player.alive,
         weapon: player.weapon,
         lore: player.lore,
-       // level: player.level,
-        exp: player.exp
                         
     });
     socket.on('newPlayer', function(data){
@@ -180,9 +173,6 @@ function checkIfPlayerIsAlive(player){
         $('#name').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
-        //$('#enemyName').hide();
-       // $('#enemyText').hide();
-        //$('#enemyInfoDisplay').hide();
         $('#lore').hide();
         $('#rollDice').hide();
         killPlayer(player);
@@ -203,30 +193,7 @@ function updatePlayerHp(player){
     });
 }
 
-// function levelUp(player){
-//     //player.exp = player.exp + 500;
-//     player.level = player.level + 1;
-//     console.log(player.level)
-//     player.ap = player.ap + 1;
-//     $('#level').html(`Lvl: ${player.level}`);
-//     $('#ap').html(`AP: ${player.ap}`);
-//    // $('#enemyDeath').html(`${enemy.name} Has Fallen!`);
-//     updatePlayerLvl(player);
-//    // $("#levelUp").html(`You have reached level` + player.level);
-// }
 
-// function updatePlayerLvl(player){
-//     $.ajax({
-//         method: "put",
-//         url: "api/updateLvl",
-//         data: {
-//                 characterName: player.name, 
-//                 hp: player.level
-//                 },
-//         success: console.log('hp updated')
-//     });
-//     console.log(data)
-// }
 
 function killPlayer(player){
     $.ajax({
@@ -267,7 +234,7 @@ function setEnemyInfo(enemy){
 
 //our constructor function. This takes the info from the selected character (stored in local memory on the getCharacterInfo.js page)
 //and creates a new object with attack and check methods attached
-function Character(characterName, characterClass, hp, ap, de, alive, weapon, lore, level, exp) {
+function Character(characterName, characterClass, hp, ap, de, alive, weapon, lore) {
     this.characterName = characterName;
     this.characterClass = characterClass;
     this.hp = hp;
@@ -276,8 +243,6 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     this.alive = true;
     this.weapon = weapon;
     this.lore = lore;
-    this.level = level;
-    this.exp = exp;
     this.combatRoll = function(enemy){
         var roll1 = Math.floor((Math.random() * 10) + 1);
         var roll2 = Math.floor((Math.random() * 10) + 1);

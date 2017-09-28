@@ -49,15 +49,6 @@ router.put('/updateHp', function(req, res){
 	})
 });
 
-// router.put('/updateLvl', function(req, res){
-//     db.Character.update({
-//         level: req.body.level
-//     },{
-//         where:{characterName: req.body.characterName}
-// 	}).then(function(characterData){
-// 		res.json(characterData);
-// 	})
-// });
 
 router.delete('/killPlayer', function(req, res){
     db.Character.destroy({

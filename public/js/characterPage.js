@@ -189,9 +189,7 @@ console.log(selectedWeapon.weaponName)
                ap: Archer.ap,
                de: Archer.de,
                weapon: Archer.weapon,
-               lore: $('#characterLore').val(),
-               level: 1,
-               exp: 0               
+               lore: $('#characterLore').val()              
               },
         success: console.log('sent')
     });
@@ -209,9 +207,7 @@ function createMage(){
                 ap: Mage.ap,
                 de: Mage.de,
                 weapon: Mage.weapon,
-                lore: $('#characterLore').val(),
-                level: 1,
-                exp: 0
+                lore: $('#characterLore').val()
                 },
         success: console.log('sent')
     });
@@ -229,9 +225,7 @@ function createWarrior(){
                 ap: Warrior.ap,
                 de: Warrior.de,
                 weapon: Warrior.weapon,
-                lore: $('#characterLore').val(),
-                level: 1,
-                exp: 0
+                lore: $('#characterLore').val()
                 },
         success: console.log('sent')
     });
