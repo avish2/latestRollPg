@@ -34,6 +34,13 @@ module.exports = function(sequelize, DataTypes){
             validate: {
                 len: [1, 500]
             }
+        },
+        level: {
+            type: DataTypes.INTEGER
+            
+        },
+        exp: {
+            type: DataTypes.INTEGER
         }
         
     });
