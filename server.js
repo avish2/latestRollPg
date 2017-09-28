@@ -78,19 +78,6 @@ app.use('/users', require('./routes/users'));
 app.use('/api', require('./routes/apiRoutes'));
 
 
-
-
-
-// Set Port
-//app.set('port', (process.env.PORT || 3000));
-
-// var server = db.sequelize.sync({ force: false }).then(function() {
-//   app.listen(PORT, function() {
-//     console.log("App listening on PORT " + PORT);
-//   });
-// });
-
-
 db.sequelize.sync({ force: false });
 var server = app.listen(PORT, function(){
   console.log('listening...')
@@ -99,7 +86,6 @@ var server = app.listen(PORT, function(){
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  //console.log(socket.id);
 
   socket.on('newPlayer', function(data){
     io.sockets.emit('newPlayer', data);
@@ -121,14 +107,5 @@ io.on('connection', function(socket){
     console.log(data);
   });
 
-  // socket.on('checkRoll', function(data){
-  //   io.sockets.emit('checkRoll', data)
-  //   console.log(data);
-  // });
-
-  // socket.on('enemyCheckRoll', function(data){
-  //   io.sockets.emit('enemyCheckRoll', data)
-  //   console.log(data);
-  // });
 });
 

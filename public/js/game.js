@@ -1,17 +1,19 @@
 $(document).ready(function(){
 createPlayer();
 setCharacterInfo();
-//setEnemyInfo();
+$("#rollDice").on('click', rollDice);
 $(document).on('click', '#combatRoll', function(){attack(enemy)});
 $('#checkRoll').on('click', CheckRoll);
-
-
 });
+
 var enemy;
 var OriginalHP;
-
 var NewHP;
-
+var characterFromLocalStorage = JSON.parse(localStorage.getItem('selectedCharacter'));
+var player;
+var displayRollArr = [];
+var rollTotalDisplay;
+var rollResult;
 var socket = io();
 
 socket.on('newEnemy', function(data){
@@ -27,7 +29,7 @@ socket.on('enemyDamage', function(data){
 socket.on('playerDamage', function(data){
     if(data.name === player.characterName){
         checkIfPlayerIsAlive(data);
-        updatePlayerStats(data);
+        updatePlayerHp(data);
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
         updateHPbar(player);
@@ -38,13 +40,7 @@ socket.on('playerDamage', function(data){
     
 });
 
-// socket.on('checkRoll', function(data){
-//     console.log('check roll sent');
-// });
-
-
-$("#rollDice").on('click', function(){
-    console.log("hello");
+function rollDice(){
     $('#diceHolder').css("display:inline");
     $('#diceTotal').empty();
     $('#diceOutcome').empty();
@@ -52,14 +48,7 @@ $("#rollDice").on('click', function(){
     $('#diceOutcome2').empty();
     $("#checkModal").css("display","none");
     $("#combatModal").css("display","none");
-});
-
-
-var characterFromLocalStorage = JSON.parse(localStorage.getItem('selectedCharacter'));
-var player;
-var displayRollArr = [];
-var rollTotalDisplay;
-var rollResult;
+}
 
 
 ///this function executes the necessary code to preform and display the results from our player.combat roll function
@@ -67,8 +56,9 @@ function attack(enemy){
     console.log(enemy)
     player.combatRoll(enemy);
     displayCombatRoll();
-    setEnemyInfo(enemy);
     sendEnemyInfo(enemy);
+    setEnemyInfo(enemy);
+    
 }
 
 function sendEnemyInfo(enemy){
@@ -82,7 +72,6 @@ function sendEnemyInfo(enemy){
 //this funcion displays the results of the users dice rolls. 
 //for now, we store the the results of the dice rolls from the player.combatRoll and player.check roll as global variables 
 //so they can be accessed by other functions
-
 function displayCombatRoll() {
     $('#combatModal').css( "display", "inline" );
     $('#checkModal').css( "display", "none" );
@@ -126,13 +115,9 @@ function CheckRoll() {
     }, 2500);
 
     
-    socket.emit('checkRoll', 'check roll')
-    
-
-    
+   // socket.emit('checkRoll', 'check roll')
     
 }
-
 
 //this creates a new instance of our constructor function and assigns the object the variable name "player"
 //we will use the player variable name to preform attack and check functions on the game page
@@ -147,8 +132,8 @@ function createPlayer(){
                                          selectedCharacter.alive,
                                          selectedCharacter.weapon,
                                          selectedCharacter.lore,
-                                         selectedCharacter.level,
-                                         selectedCharacter.exp
+                                        // selectedCharacter.level,
+                                         //selectedCharacter.exp
                                         );
     player = sessionCharacter;
    
@@ -160,7 +145,7 @@ function createPlayer(){
         alive: player.alive,
         weapon: player.weapon,
         lore: player.lore,
-        level: player.level,
+       // level: player.level,
         exp: player.exp
                         
     });
@@ -178,12 +163,11 @@ function setCharacterInfo(){
     $('#attackVal').html(`Your Attack Value is ${player.ap}`);
     $('#lore').html(player.lore);
     $("#health").html(`Health Points: ${player.hp}`);
-    $('#characterInfoDisplay').prepend(`<li class= "characterAttributes"> Ap: ${player.ap}</li>
-                                       <li class= "characterAttributes"> De: ${player.de}</li>
+    $('#characterInfoDisplay').prepend(`<li class= "characterAttributes" id="ap"> Ap: ${player.ap}</li>
+                                       <li class= "characterAttributes" id="de"> De: ${player.de}</li>
                                        <li class= "characterAttributes"> <strong>Class:</strong> ${player.characterClass}</li>
                                        <li class= "characterAttributes"> <strong>Weapon:</strong> ${player.weapon}</li>
-                                       <li class = "characterAttributes"> <strong>Level: </strong> ${player.level}</li>
-                                       <li class = "characterAttributes"> <strong>Exp: </strong> ${player.exp}</li>`);
+                                       `);
 setImages();
 updateHPbar(player);
 
@@ -196,8 +180,9 @@ function checkIfPlayerIsAlive(player){
         $('#name').html(`${player.name} Has Fallen!`);
         $('#combatRoll').hide();
         $('#checkRoll').hide();
-        $('#enemyName').hide();
-        $('#enemyInfoDisplay').hide();
+        //$('#enemyName').hide();
+       // $('#enemyText').hide();
+        //$('#enemyInfoDisplay').hide();
         $('#lore').hide();
         $('#rollDice').hide();
         killPlayer(player);
@@ -206,18 +191,42 @@ function checkIfPlayerIsAlive(player){
     }
 }
 
-function updatePlayerStats(player){
+function updatePlayerHp(player){
     $.ajax({
         method: "put",
         url: "api/updateHp",
         data: {
                 characterName: player.name, 
-                hp: player.hp,
-                level: player.level
+                hp: player.hp
                 },
         success: console.log('hp updated')
     });
 }
+
+// function levelUp(player){
+//     //player.exp = player.exp + 500;
+//     player.level = player.level + 1;
+//     console.log(player.level)
+//     player.ap = player.ap + 1;
+//     $('#level').html(`Lvl: ${player.level}`);
+//     $('#ap').html(`AP: ${player.ap}`);
+//    // $('#enemyDeath').html(`${enemy.name} Has Fallen!`);
+//     updatePlayerLvl(player);
+//    // $("#levelUp").html(`You have reached level` + player.level);
+// }
+
+// function updatePlayerLvl(player){
+//     $.ajax({
+//         method: "put",
+//         url: "api/updateLvl",
+//         data: {
+//                 characterName: player.name, 
+//                 hp: player.level
+//                 },
+//         success: console.log('hp updated')
+//     });
+//     console.log(data)
+// }
 
 function killPlayer(player){
     $.ajax({
@@ -231,21 +240,20 @@ function killPlayer(player){
 }
 
 
-
 //this function displays the current enemy stats
 function setEnemyInfo(enemy){
     if(enemy.hp <= 0){
         enemy.alive === false
-        player.exp = player.exp + 500;
-        player.level++;
-        $('#enemyName').html(`${enemy.name} has fallen. You have gained 500 exp.`);
+        $('#enemyDeath').show();
+        $('#enemyDeath').html(`${enemy.name} has fallen.`);
         $('#enemyInfoDisplay').hide();
-       
-        
-        $("#expLevel").html(`You have reached level` + player.level);
-        
+        $('#enemyText').hide();
         enemy = '';
+        levelUp(player);
+        
+
     }else{
+
     $('#enemyInfoDisplay').show();
     $('#enemyText').show();
     $('#enemyInfoDisplay').html(`<li class= enemyAttributes> Hp: ${enemy.hp}</li>
@@ -342,37 +350,6 @@ function updateHPbar(player){
             break;
     }
 }
-
-
-function updateHPbar(player){
-    console.log('tits')
-    $('#health').html("HP: " + player.hp);
-    switch(player.characterClass){
-        case 'Archer':
-            var OriginalHP = 125;
-            var NewHP = player.hp;
-            var barHP = Math.round((NewHP / OriginalHP)*100);
-            $('.bar').attr('style', 'width:' + barHP + '%');
-            break;
-            
-        case 'Mage':
-            var OriginalHP = 100;
-            var NewHP = player.hp;
-            var barHP = Math.round((NewHP / OriginalHP)*100);
-            $('.bar').attr('style', 'width:' + barHP + '%');
-            break;
-        
-        case 'Warrior':
-            var OriginalHP = 150;
-            var NewHP = player.hp;
-            var barHP = Math.round((NewHP / OriginalHP)*100);
-            $('.bar').attr('style', 'width:' + barHP + '%');
-            break;
-    }
-}
-
-
-
 
 
 function setImages(){
