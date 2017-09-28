@@ -1,6 +1,7 @@
 {
   "development": {
     "username": "root",
+    "password": "gokuh123",
     "password": "root",
     "database": "rollpgDB",
     "host": "127.0.0.1",

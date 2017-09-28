@@ -27,7 +27,7 @@ socket.on('enemyDamage', function(data){
 socket.on('playerDamage', function(data){
     if(data.name === player.characterName){
         checkIfPlayerIsAlive(data);
-        updatePlayerHp(data);
+        updatePlayerStats(data);
         player.hp = data.hp;
         $('#playerHp').html(`HP: ${player.hp}`);
         updateHPbar(player);
@@ -146,7 +146,9 @@ function createPlayer(){
                                          selectedCharacter.de,
                                          selectedCharacter.alive,
                                          selectedCharacter.weapon,
-                                         selectedCharacter.lore
+                                         selectedCharacter.lore,
+                                         selectedCharacter.level,
+                                         selectedCharacter.exp
                                         );
     player = sessionCharacter;
    
@@ -157,7 +159,9 @@ function createPlayer(){
         de: player.de,
         alive: player.alive,
         weapon: player.weapon,
-        lore: player.lore
+        lore: player.lore,
+        level: player.level,
+        exp: player.exp
                         
     });
     socket.on('newPlayer', function(data){
@@ -178,7 +182,8 @@ function setCharacterInfo(){
                                        <li class= "characterAttributes"> De: ${player.de}</li>
                                        <li class= "characterAttributes"> <strong>Class:</strong> ${player.characterClass}</li>
                                        <li class= "characterAttributes"> <strong>Weapon:</strong> ${player.weapon}</li>
-                                       `);
+                                       <li class = "characterAttributes"> <strong>Level: </strong> ${player.level}</li>
+                                       <li class = "characterAttributes"> <strong>Exp: </strong> ${player.exp}</li>`);
 setImages();
 updateHPbar(player);
 
@@ -201,13 +206,14 @@ function checkIfPlayerIsAlive(player){
     }
 }
 
-function updatePlayerHp(player){
+function updatePlayerStats(player){
     $.ajax({
         method: "put",
         url: "api/updateHp",
         data: {
                 characterName: player.name, 
                 hp: player.hp,
+                level: player.level
                 },
         success: console.log('hp updated')
     });
@@ -224,12 +230,19 @@ function killPlayer(player){
     });
 }
 
+
+
 //this function displays the current enemy stats
 function setEnemyInfo(enemy){
     if(enemy.hp <= 0){
         enemy.alive === false
-        $('#enemyName').html(`${enemy.name} has fallen`);
+        player.exp = player.exp + 500;
+        player.level++;
+        $('#enemyName').html(`${enemy.name} has fallen. You have gained 500 exp.`);
         $('#enemyInfoDisplay').hide();
+       
+        
+        $("#expLevel").html(`You have reached level` + player.level);
         
         enemy = '';
     }else{
@@ -246,7 +259,7 @@ function setEnemyInfo(enemy){
 
 //our constructor function. This takes the info from the selected character (stored in local memory on the getCharacterInfo.js page)
 //and creates a new object with attack and check methods attached
-function Character(characterName, characterClass, hp, ap, de, alive, weapon, lore) {
+function Character(characterName, characterClass, hp, ap, de, alive, weapon, lore, level, exp) {
     this.characterName = characterName;
     this.characterClass = characterClass;
     this.hp = hp;
@@ -255,6 +268,8 @@ function Character(characterName, characterClass, hp, ap, de, alive, weapon, lor
     this.alive = true;
     this.weapon = weapon;
     this.lore = lore;
+    this.level = level;
+    this.exp = exp;
     this.combatRoll = function(enemy){
         var roll1 = Math.floor((Math.random() * 10) + 1);
         var roll2 = Math.floor((Math.random() * 10) + 1);

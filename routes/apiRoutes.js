@@ -12,7 +12,10 @@ router.post('/character', function(req, res){
         de: req.body.de,
         weapon: req.body.weapon,
         lore: req.body.lore,
-        UserId: req.user.id
+        level: req.body.level,
+        exp: req.body.exp,
+        UserId: req.user.id,
+
     }
     db.Character.create(newCharacter);
     //redirect to new page displaying characters???

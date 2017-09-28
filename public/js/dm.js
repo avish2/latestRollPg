@@ -6,7 +6,7 @@ $(document).on('click', '#enemyCheckRollBtn', displayEnemyCheckRoll);
 $(document).on('click', '#startSessionBtn', displayPlayers);
 });
 
-
+//model, 
 
 var socket = io();
 var playerArr = [];
@@ -142,7 +142,8 @@ function displayPlayers(){
                             <li>AP: ${playerInArr.ap}</li>   
                             <li>DE: ${playerInArr.de}</li>   
                             <li>Weapon: ${playerInArr.weapon}</li>
-                            <li>Lore: ${playerInArr.lore}</li></ul>                        
+                            <li>Lore: ${playerInArr.lore}</li>
+                            <li>Level: ${playerInArr.level}</li></ul>                        
     `);
     });
     $('#createEnemyBtn').show();
@@ -228,7 +229,8 @@ function createEnemy(){
                             selectedEnemy.ap,
                             selectedEnemy.de,
                             selectedEnemy.weapon,
-                            selectedEnemy.lore
+                            selectedEnemy.lore,
+                            selectedEnemy.exp
                             );
 
     currentEnemy = sessionEnemy;
@@ -241,7 +243,8 @@ function createEnemy(){
        de: currentEnemy.de,
        alive: currentEnemy.alive,
        weapon: currentEnemy.weapon,
-       lore: currentEnemy.lore
+       lore: currentEnemy.lore,
+       exp: currentEnemy.exp
                        
    });
    socket.on('newEnemy', function(data){
