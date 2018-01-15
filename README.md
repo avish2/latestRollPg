@@ -16,6 +16,19 @@ Libraries and Technologies
 HTML, CSS, Bootstrap, Handlebars, Javascript, JQuery, node, Express, Sequelize, Passport, Socket IO.
 Featured Technology Socket IO - a JavaScript library for realtime web applications. It enables realtime, bi-directional communication between web clients and servers. It has two parts: a client-side library that runs in the browser, and a server-side library for Node.js. Like Node.js, it is event-driven.
 
+My Contributions include visuals, application layout, weapon and dice art and dice animation and assistance with backend logic.
+
+## Application Layout - creating a character
+<img src="http://www.giphy.com/gifs/l49JZ24yjMumSqty0" height="200" />
+
+
+## Weapon Design - selecting a weapon
+<img src="http://www.giphy.com/gifs/3o75201FoX7GinVJ7O" height="200" />
+
+## Dice Animation
+<img src="http://www.giphy.com/gifs/3o751QMw4oZ7iMMt8s" height="200" />
+
+
 Instructions
 Registration: All users, players and dungeon masters, are required to register. Users will be able to select the role of dungeon master or player once they have logged in. 
 
