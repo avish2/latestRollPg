@@ -1,10 +1,9 @@
 # RollPG
-Readme
 
 Team
+Angela Vish
 Stephen Hopkins
 Tyler Frega
-Angela Vish
 Aaron Toliver
 Logan Hasty
 
