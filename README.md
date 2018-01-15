@@ -21,7 +21,7 @@ My Contributions include visuals, application layout, weapon and dice art and di
 ![](https://media.giphy.com/media/l49JZ24yjMumSqty0/giphy.gif)
 
 
-## Weapon Design - selecting a weapon
+## Weapon Design - selecting a class
 ![](https://media.giphy.com/media/3o75201FoX7GinVJ7O/giphy.gif)
 
 ## Dice Animation
