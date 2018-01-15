@@ -19,14 +19,14 @@ Featured Technology Socket IO - a JavaScript library for realtime web applicatio
 My Contributions include visuals, application layout, weapon and dice art and dice animation and assistance with backend logic.
 
 ## Application Layout - creating a character
-![](http://www.giphy.com/gifs/l49JZ24yjMumSqty0)
+![](https://media.giphy.com/media/l49JZ24yjMumSqty0/giphy.gif)
 
 
 ## Weapon Design - selecting a weapon
-![](http://www.giphy.com/gifs/3o75201FoX7GinVJ7O)
+![](https://media.giphy.com/media/3o75201FoX7GinVJ7O/giphy.gif)
 
 ## Dice Animation
-![](http://www.giphy.com/gifs/3o751QMw4oZ7iMMt8s)
+![](https://media.giphy.com/media/3o751QMw4oZ7iMMt8s/giphy.gif)
 
 
 Instructions
